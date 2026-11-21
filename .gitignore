@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Data & Artifacts (대용량 데이터/모델 가중치 커밋 금지)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+artifacts/
+*.parquet
+*.csv
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.cbm
+*.lgb
+*.mmap
+
+# Notebooks & Secrets
+.ipynb_checkpoints/
+notebooks/*_output.ipynb
+.env
+*secret*.txt
+*key*.txt
+
+# OS / IDE
+.DS_Store
+Thumbs.db

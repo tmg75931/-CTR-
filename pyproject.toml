@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toss-ctr"
+version = "0.1.0"
+description = "토스광고 클릭 예측(CTR) 모델 개발 파이프라인 (Colab-First & Memory-Safe)"
+readme = "GEMINI.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "scikit-learn>=1.4",
+    "pandas>=2.2",
+    "pyarrow>=15.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+colab = [
+    "duckdb>=1.0",
+    "polars>=1.0",
+    "lightgbm>=4.3",
+    "catboost>=1.2",
+    "xgboost>=2.0",
+    "torch>=2.2",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

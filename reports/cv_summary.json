@@ -1,0 +1,106 @@
+{
+  "n_rows": 10704179,
+  "test_rows": 1527298,
+  "n_splits": 5,
+  "seed": 42,
+  "overall_ctr": 0.019075,
+  "temporal_regime": "out_of_time_shifted",
+  "tvd": 0.857408,
+  "tvd_threshold": 0.15,
+  "unseen_test_days": [],
+  "oot_mode": "auto",
+  "oot_marked": true,
+  "oot_day": "7",
+  "oot_rows": 1526335,
+  "oot_ratio": 0.142592,
+  "stratification_fallback": "none",
+  "day_of_week_compare": [
+    {
+      "day_of_week": "1",
+      "train_count": 1525483,
+      "test_count": 0,
+      "train_share": 0.142513,
+      "test_share": 0.0
+    },
+    {
+      "day_of_week": "2",
+      "train_count": 1532022,
+      "test_count": 0,
+      "train_share": 0.143124,
+      "test_share": 0.0
+    },
+    {
+      "day_of_week": "3",
+      "train_count": 1529921,
+      "test_count": 0,
+      "train_share": 0.142927,
+      "test_share": 0.0
+    },
+    {
+      "day_of_week": "4",
+      "train_count": 1530297,
+      "test_count": 0,
+      "train_share": 0.142963,
+      "test_share": 0.0
+    },
+    {
+      "day_of_week": "5",
+      "train_count": 1529839,
+      "test_count": 0,
+      "train_share": 0.14292,
+      "test_share": 0.0
+    },
+    {
+      "day_of_week": "6",
+      "train_count": 1530282,
+      "test_count": 0,
+      "train_share": 0.142961,
+      "test_share": 0.0
+    },
+    {
+      "day_of_week": "7",
+      "train_count": 1526335,
+      "test_count": 1527298,
+      "train_share": 0.142592,
+      "test_share": 1.0
+    }
+  ],
+  "fold_summary": [
+    {
+      "fold_id": 0,
+      "rows": 2140836,
+      "pos_rows": 40836,
+      "ctr": 0.019075,
+      "oot_rows": 305267
+    },
+    {
+      "fold_id": 1,
+      "rows": 2140836,
+      "pos_rows": 40836,
+      "ctr": 0.019075,
+      "oot_rows": 305267
+    },
+    {
+      "fold_id": 2,
+      "rows": 2140836,
+      "pos_rows": 40836,
+      "ctr": 0.019075,
+      "oot_rows": 305267
+    },
+    {
+      "fold_id": 3,
+      "rows": 2140836,
+      "pos_rows": 40836,
+      "ctr": 0.019075,
+      "oot_rows": 305267
+    },
+    {
+      "fold_id": 4,
+      "rows": 2140835,
+      "pos_rows": 40835,
+      "ctr": 0.019074,
+      "oot_rows": 305267
+    }
+  ],
+  "output_path": "/content/work/processed/folds.parquet"
+}

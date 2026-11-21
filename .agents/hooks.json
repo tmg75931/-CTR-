@@ -1,0 +1,17 @@
+{
+  "post-edit-verify": {
+    "enabled": false,
+    "PostToolUse": [
+      {
+        "matcher": "write_file|edit_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ruff check src tests",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

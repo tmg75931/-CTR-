@@ -1,0 +1,34 @@
+{
+  "train": {
+    "source_path": "/content/work/model_data/train_seq.parquet",
+    "output_path": "/content/work/model_data/train_seq_summary.parquet",
+    "id_col": "row_id",
+    "rows": 1225074,
+    "empty_rows": 0,
+    "empty_ratio": 0.0,
+    "mean_token_len": 520.4929,
+    "p50_token_len": 426.0,
+    "p90_token_len": 1116.0,
+    "p95_token_len": 1336.0,
+    "p99_token_len": 1842.0,
+    "max_token_len": 10560,
+    "detected_delimiter": ",",
+    "output_size_mb": 17.657
+  },
+  "test": {
+    "source_path": "/content/work/model_data/test_seq.parquet",
+    "output_path": "/content/work/model_data/test_seq_summary.parquet",
+    "id_col": "ID",
+    "rows": 1527298,
+    "empty_rows": 0,
+    "empty_ratio": 0.0,
+    "mean_token_len": 542.1629,
+    "p50_token_len": 453.0,
+    "p90_token_len": 1135.0,
+    "p95_token_len": 1354.0,
+    "p99_token_len": 1859.0,
+    "max_token_len": 15752,
+    "detected_delimiter": ",",
+    "output_size_mb": 19.556
+  }
+}

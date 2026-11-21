@@ -1,0 +1,53 @@
+# 토스광고 CTR 이종 모델 OOF 블렌딩, 50:50 WLL 확률 보정 및 최종 제출 설정
+paths:
+  preds_dir: "/content/drive/MyDrive/toss_ctr/data/processed/predictions"
+  train_tabular: "/content/drive/MyDrive/toss_ctr/data/processed/train_tabular_diet.parquet"
+  test_tabular: "/content/drive/MyDrive/toss_ctr/data/processed/test_tabular_diet.parquet"
+  folds_path: "/content/drive/MyDrive/toss_ctr/data/processed/folds.parquet"
+  sample_submission: "/content/drive/MyDrive/toss_ctr/data/raw/sample_submission.csv"
+  submission_path: "/content/drive/MyDrive/toss_ctr/outputs/submissions/submission_ensemble_wll50.csv"
+  report_path: "/content/drive/MyDrive/toss_ctr/reports/ensemble_wll50_report.json"
+  calibrator_path: "/content/drive/MyDrive/toss_ctr/artifacts/ensemble_wll50_calibrator.json"
+
+seed: 42
+
+models:
+  candidates:
+    - "lgbm_baseline"
+    - "lgbm_fe_tuned"
+    - "catboost_fe_tuned"
+    - "xgb_fe_tuned"
+    - "deep_seq_dcn"
+  auto_select_existing: true
+  require_test_preds: true
+
+blender:
+  method: "oof_logit"
+  objective: "combined_score"   # "combined_score" (0.5*AP + 0.5/(1+WLL)) 또는 "wll"
+  blend_space: "logit"
+  opt_max_samples: 500000
+  n_restarts: 24
+  max_iter: 120
+  test_agg: "logit_mean"
+
+calibration:
+  method: "affine_logit"        # "affine_logit" (단조 증가 AP 보존) 또는 "group_shrinkage"
+  oof: true
+  l2_reg: 1.0e-6
+  min_scale: 1.0e-3
+  max_scale: 20.0
+  fit_intercept: true
+  test_agg: "logit_mean"
+  group_bias:
+    enabled: false
+    group_col: "inventory_id"
+    shrinkage: 500.0
+    max_offset: 3.0
+    only_accept_if_improves: true
+
+submission:
+  id_col: "ID"
+  target_col: "clicked"
+  expected_rows: 1527298
+  eps: 1.0e-15
+  strict_verify: true

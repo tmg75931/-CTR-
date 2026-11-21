@@ -1,0 +1,62 @@
+# 토스광고 CTR 시퀀스 추출 및 PyTorch Target-Attention + DCN-v2 학습 설정
+
+paths:
+  train_tabular: "/content/drive/MyDrive/toss_ctr/data/processed/train_tabular_diet.parquet"
+  test_tabular: "/content/drive/MyDrive/toss_ctr/data/processed/test_tabular_diet.parquet"
+  train_seq: "/content/drive/MyDrive/toss_ctr/data/processed/train_seq.parquet"
+  test_seq: "/content/drive/MyDrive/toss_ctr/data/processed/test_seq.parquet"
+  folds_path: "/content/drive/MyDrive/toss_ctr/data/processed/folds.parquet"
+  train_seq_summary: "/content/drive/MyDrive/toss_ctr/data/processed/train_seq_summary.parquet"
+  test_seq_summary: "/content/drive/MyDrive/toss_ctr/data/processed/test_seq_summary.parquet"
+  pred_dir: "/content/drive/MyDrive/toss_ctr/data/processed/predictions"
+  oof_pred_filename: "oof_deep_seq_dcn.parquet"
+  test_pred_filename: "test_deep_seq_dcn.parquet"
+  model_dir: "/content/drive/MyDrive/toss_ctr/artifacts/deep_seq_dcn"
+  report_dir: "/content/drive/MyDrive/toss_ctr/reports"
+  memmap_cache_dir: "/content/tmp_deepctr_cache"
+
+seq:
+  delimiter: "auto"
+  max_seq_len: 100
+  min_freq: 5
+  max_vocab_size: 100000
+  padding: "post"
+  truncating: "pre"
+  summary_batch_size: 131072
+  compression: "zstd"
+  compression_level: 3
+
+preprocessing:
+  cat_min_freq: 5
+  cat_max_cardinality: 100000
+  apply_signed_log1p: true
+  numeric_clip_value: 10.0
+  stream_batch_size: 262144
+
+model:
+  seq_embed_dim: 32
+  cat_embed_dim: 16
+  query_cols:
+    - "inventory_id"
+    - "l_feat_14"
+  att_hidden_dim: 64
+  num_proj_dim: 64
+  cross_layers: 3
+  cross_low_rank_dim: null
+  mlp_dims: [256, 128, 64]
+  dropout: 0.15
+
+training:
+  n_splits: 5
+  batch_size: 2048
+  eval_batch_size: 4096
+  epochs: 8
+  lr: 1.0e-3
+  weight_decay: 1.0e-5
+  use_amp: true
+  amp_dtype: "float16"
+  grad_clip_norm: 1.0
+  early_stopping_patience: 2
+  monitor_metric: "score"
+  seed: 42
+  use_pos_weight_50_50: true

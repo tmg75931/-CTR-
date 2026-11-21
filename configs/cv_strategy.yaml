@@ -1,0 +1,25 @@
+# 토스광고 CTR 시간축 적응형 Local CV 분할 설정
+paths:
+  train_path: "/content/drive/MyDrive/toss_ctr/data/processed/train_tabular_diet.parquet"
+  test_path: "/content/drive/MyDrive/toss_ctr/data/processed/test_tabular_diet.parquet"
+  output_path: "/content/drive/MyDrive/toss_ctr/data/processed/folds.parquet"
+  report_path: "/content/drive/MyDrive/toss_ctr/reports/cv_summary.json"
+
+cv:
+  method: "stratified_time_kfold"
+  n_splits: 5
+  seed: 42
+  stratify_cols:
+    - "day_of_week"
+    - "clicked"
+  time_col: "day_of_week"
+  target_col: "clicked"
+
+oot:
+  mode: "auto"
+  tvd_threshold: 0.15
+  mark_last_day_if_in_time: true
+
+streaming:
+  batch_size: 262144
+  compression: "zstd"

@@ -1,0 +1,24 @@
+# 토스광고 CTR 데이터 경량화(Diet Parquet & Seq 분리) 설정
+paths:
+  raw_train: "/content/drive/MyDrive/toss_ctr/data/raw/train.parquet"
+  raw_test: "/content/drive/MyDrive/toss_ctr/data/raw/test.parquet"
+  eda_summary: "/content/drive/MyDrive/toss_ctr/reports/eda_summary.json"
+  output_dir: "/content/drive/MyDrive/toss_ctr/data/processed"
+
+artifacts:
+  train_tabular: "train_tabular_diet.parquet"
+  test_tabular: "test_tabular_diet.parquet"
+  train_seq: "train_seq.parquet"
+  test_seq: "test_seq.parquet"
+  manifest: "diet_manifest.json"
+
+streaming:
+  batch_size: 262144
+  compression: "zstd"
+  compression_level: 3
+
+downcast:
+  downcast_float32: true
+  downcast_integers: true
+  verify_row_counts: true
+  save_manifest: true
